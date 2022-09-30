@@ -11,9 +11,9 @@ const updateSelectedItems = (value) => {
 
 const handleDepartmentFilterStatusChange = (valueOfCheckbox) => {
   updateSelectedItems(valueOfCheckbox);
-  if (tableData || checked.length === 0) {
+  if (tableData) {
     const filteredData = allocationTableSkillsMapping(tableData);
-    if (valueOfCheckbox == "AllSupport") {
+    if (valueOfCheckbox == "AllSupport"  || checked.length === 0) {
       const supportDepartments = filteredData.filter((item) =>
         SupportDepartments.includes(item.departmentName)
       );
