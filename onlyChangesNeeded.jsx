@@ -1,7 +1,19 @@
-const handleDepartmentFilterStatusChange = (data) => {
+const [checked, setChecked] = useState([]);
+const updateSelectedItems = (value) => {
+  var updatedList = [...checked];
+  if (updatedList.includes(value)) {
+    updatedList.splice(checked.indexOf(event.target.value), 1);
+  } else {
+    updatedList = [...checked, event.target.value];
+  }
+  setChecked(updatedList);
+};
+
+const handleDepartmentFilterStatusChange = (valueOfCheckbox) => {
+  updateSelectedItems(valueOfCheckbox);
   if (tableData) {
     const filteredData = allocationTableSkillsMapping(tableData);
-    if (data == "AllSupport") {
+    if (valueOfCheckbox == "AllSupport") {
       const supportDepartments = filteredData.filter((item) =>
         SupportDepartments.includes(item.departmentName)
       );
@@ -9,7 +21,7 @@ const handleDepartmentFilterStatusChange = (data) => {
     } else {
       setFilterTableData(
         filteredData.filter((item) => {
-          return item.departmentName === data;
+          return checked.includes(item.departmentName);
         })
       );
     }
